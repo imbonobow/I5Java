@@ -13,8 +13,8 @@ Se placer dans le dossier et faire la commande **docker compose up -d**
 
 Se connecter via l'adminer à la BDD : http://localhost:8080
 
-user : root 
-password : example
+- user : root 
+- password : example
 
 Il faut créer manuellement la base de données appelé : **Cours**
 
@@ -26,4 +26,8 @@ Une fois le projet ouvert, veuillez utiliser la commande **mvn clean install -Ds
 Dans un second temps, éxécutez le programme RiocApplication.
 
 Le lien vers le swagger devrait maintenant être disponible : http://localhost:8081/swagger-ui/index.html
+Vous pouvez tester les différents controleurs : 
+- hello : afin de voir si la connexion est OK 
+- account : plusieurs endpoint disponible (post, delete all, get...)
+- bank detail : endpoint get / post / delete afin de créer un iban sur un ID d'account existant.
 
