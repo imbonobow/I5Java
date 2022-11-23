@@ -3,6 +3,7 @@ package com.rioc.ws.controllers;
 import com.rioc.ws.exceptions.ApiException;
 import com.rioc.ws.models.dao.Account;
 import com.rioc.ws.models.dto.AccountDto;
+import com.rioc.ws.models.dto.AccountNoBankDto;
 import com.rioc.ws.models.dto.BankDetailDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class AccountController
 	}
 
 	@PostMapping("/accounts")
-	public ResponseEntity<AccountDto> postAccount (@RequestBody @Valid AccountDto account, BindingResult bindingResult)
+	public ResponseEntity<AccountNoBankDto> postAccount (@RequestBody @Valid AccountNoBankDto account, BindingResult bindingResult)
 	{
 		if(bindingResult.hasErrors()){
 			throw new ApiException("Invalid account", HttpStatus.NOT_ACCEPTABLE);
@@ -40,7 +41,7 @@ public class AccountController
 		return service.delAccount(id);
 	}
 	@GetMapping("/accounts")
-	public List<Account> getAllAccounts ()
+	public List<AccountDto> getAllAccounts ()
 	{
 		return service.getAllAccount();
 	}
@@ -49,12 +50,11 @@ public class AccountController
 	{
 		return service.getAccountById(id);
 	}
+
 	@DeleteMapping("/accounts")
 	public void delAllAccounts ()
 	{
 		service.delAllAccounts();
 	}
-
-
 
 }

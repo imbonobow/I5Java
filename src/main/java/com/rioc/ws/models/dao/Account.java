@@ -1,7 +1,11 @@
 package com.rioc.ws.models.dao;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.rioc.ws.models.dto.BankDetailDto;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table (name = "accounts")
@@ -24,12 +28,18 @@ public class Account implements Serializable {
 	@JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ADDRESS_ID")
 	private Address address;
 
-	public Account (int accountId, String firstName, String lastName, Address address)
+	//link to bankdetail (when account is deleted, all bankdetails linked to this account are deleted)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
+	@JsonManagedReference //forward part of the reference
+	private List<BankDetail> bankDetails;
+
+	public Account (int accountId, String firstName, String lastName, Address address, List<BankDetail> bankDetails)
 	{
 		this.accountId = accountId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
+		this.bankDetails = bankDetails;
 	}
 
 	public int getAccountId ()
@@ -70,6 +80,16 @@ public class Account implements Serializable {
 	public void setAddress (Address address)
 	{
 		this.address = address;
+	}
+
+	public List<BankDetail> getBankDetails ()
+	{
+		return bankDetails;
+	}
+
+	public void setBankDetails (List<BankDetail> bankDetails)
+	{
+		this.bankDetails = bankDetails;
 	}
 
 	public Account () {

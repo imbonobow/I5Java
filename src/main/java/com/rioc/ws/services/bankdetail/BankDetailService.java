@@ -29,8 +29,6 @@ public class BankDetailService implements iBankDetailService
 		this.mapper = mapper;
 	}
 
-
-
 	public BankDetailDto postBankDetail (BankDetailDto bankDetail)
 	{
 
@@ -52,10 +50,7 @@ public class BankDetailService implements iBankDetailService
 			bankDetailDao = bankDetailRepository.save(bankDetailDao);
 			return bankDetail;
 		}
-
-
 	}
-
 
 	public BankDetail getBankDetailById (int id)
 	{

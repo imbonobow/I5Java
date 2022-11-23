@@ -1,5 +1,6 @@
 package com.rioc.ws.models.dao;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,6 +20,7 @@ public class BankDetail implements Serializable
 	@Column(name = "IBAN")
 	private String iban;
 
+	@JsonBackReference //bidirectional relationship
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ACCOUNT_ID")
 	private Account account;

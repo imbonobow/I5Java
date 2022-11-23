@@ -2,30 +2,37 @@ package com.rioc.ws.services.account;
 
 import com.rioc.ws.exceptions.ApiException;
 import com.rioc.ws.mappers.iAccountMapper;
+import com.rioc.ws.mappers.iAccountNoBankMapper;
 import com.rioc.ws.models.dao.Account;
+import com.rioc.ws.models.dao.BankDetail;
 import com.rioc.ws.models.dto.AccountDto;
+import com.rioc.ws.models.dto.AccountNoBankDto;
 import com.rioc.ws.repositories.iAccountRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountService implements iAccountService
 {
 	private iAccountRepository repository;
 	private iAccountMapper mapper;
+	private iAccountNoBankMapper mapperNoBank;
 
-	public AccountService (iAccountRepository repository, iAccountMapper mapper)
+	public AccountService (iAccountRepository repository, iAccountMapper mapper, iAccountNoBankMapper mapperNoBank)
 	{
 		super();
-		this.mapper = mapper;
 		this.repository = repository;
+		this.mapper = mapper;
+		this.mapperNoBank = mapperNoBank;
 	}
 
+
 	//post account
-	public AccountDto postAccount (AccountDto account)
+	public AccountNoBankDto postAccount (AccountNoBankDto account)
 	{
 		if (!repository.findAccountByFirstNameAndLastName(account.getFirstName(), account.getLastName()).isEmpty())
 		{
@@ -58,7 +65,7 @@ public class AccountService implements iAccountService
 			if (Double.parseDouble(result.substring(result.indexOf("score") + 7, result.indexOf("score") + 10)) > 0.7)
 			{
 				//if score > 0,7 then it's ok, save the account
-				repository.save(mapper.accountDtoToAccount(account));
+				repository.save(mapperNoBank.accountDtoToAccount(account));
 				return account;
 			}
 			//send error and don't save the address
@@ -93,16 +100,13 @@ public class AccountService implements iAccountService
 	}
 
 	//get all accounts
-	public List<Account> getAllAccount ()
+	public List<AccountDto> getAllAccount ()
 	{
-		return repository.findAll();
+		return repository.findAll().stream().map(mapper::accountToAccountDto).toList();
 	}
 
-	//get Account by id
 	public Account getAccountById (int id)
 	{
 		return repository.findById(id).orElse(null);
 	}
-
-
 }

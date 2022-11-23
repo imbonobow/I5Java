@@ -1,6 +1,5 @@
 package com.rioc.ws.models.dto;
 
-import com.rioc.ws.models.dao.BankDetail;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,10 +11,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
-@Data @NoArgsConstructor
+
+
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AccountDto
+public class AccountNoBankDto
 {
 	@NotBlank
 	@NotNull
@@ -30,6 +32,4 @@ public class AccountDto
 
 	private String lastName;
 	private AddressDto address;
-	private List<BankDetailDto> bankDetails;
-
 }

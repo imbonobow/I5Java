@@ -10,6 +10,4 @@ public interface iAccountMapper
 	AccountDto accountToAccountDto (Account account);
 	Account accountDtoToAccount (AccountDto account);
 
-	Account toDao (AccountDto account);
-	AccountDto toDto (Account accountDao);
 }
