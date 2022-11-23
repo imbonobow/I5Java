@@ -3,7 +3,6 @@
 Outils nécessaire : 
 - Docker 
 - IDE Java
-- JDK 
 - Pluggin Spring
 - Java version 17 
 
