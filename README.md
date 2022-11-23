@@ -31,3 +31,5 @@ Vous pouvez tester les différents controleurs :
 - account : plusieurs endpoint disponible (post, delete all, get...)
 - bank detail : endpoint get / post / delete afin de créer un iban sur un ID d'account existant.
 
+Tout fonctionne bien, cependant je n'ai pas fait le chiffrage AES128.
+
