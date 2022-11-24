@@ -1,5 +1,7 @@
 # I5Java
 
+Author : Mathis Dompierre I5ARIOC-FISA
+
 Outils nécessaire : 
 - Docker 
 - IDE Java
